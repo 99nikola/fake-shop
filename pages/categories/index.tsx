@@ -1,4 +1,5 @@
 import { GetStaticProps, NextPage } from "next"
+import Link from "next/link";
 
 interface CategoriesProps {
     categories: string[]
@@ -8,7 +9,13 @@ interface CategoriesProps {
 const Categories: NextPage<CategoriesProps> = (props) => {
     return (
         <div>
-            Categories      
+            {props.categories.map((category: string) => (
+                <Link 
+                    href={`/categories/${category}`}
+                    key={category}
+                >{category}
+                </Link>
+            ))}      
         </div>
     );
 }
