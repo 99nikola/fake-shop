@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Breadcrumb from "./Breadcrumb";
 
 const Navbar: React.FC = (props) => {
     return (
@@ -8,6 +9,8 @@ const Navbar: React.FC = (props) => {
             <Link href="/products">Products</Link>
             <Link href="/categories">Categories</Link>
             <Link href="/cart">Cart</Link>
+
+            <Breadcrumb />
 
             <main>
                 {props.children}
