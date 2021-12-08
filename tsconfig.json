@@ -15,6 +15,6 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "jest.setup.js", "components/layouts/tests/Navbar.test.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "jest.setup.js", "components/layouts/tests/Navbar.test.js", "pages/categories/[categoryName]/[productId]"],
   "exclude": ["node_modules"]
 }
