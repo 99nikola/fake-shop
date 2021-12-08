@@ -1,1 +1,1 @@
-# Fake Shop Store using https://fakestoreapi.com/
+# Fake Shop using [FakeStoreAPI](https://fakestoreapi.com/)
