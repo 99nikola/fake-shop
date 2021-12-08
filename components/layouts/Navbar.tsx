@@ -3,6 +3,7 @@ import Link from "next/link";
 const Navbar: React.FC = (props) => {
     return (
         <nav>
+            <Link href="/">Home</Link>
             <Link href="/users">Users</Link>
             <Link href="/products">Products</Link>
             <Link href="/categories">Categories</Link>
