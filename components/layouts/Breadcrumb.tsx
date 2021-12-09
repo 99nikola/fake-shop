@@ -49,6 +49,7 @@ const Breadcrumb: React.FC = () => {
             <Flex 
                 key={link.breadcrumb}
                 margin="0 5px"
+                color="darkblue"
             >
                 <Link href={link.href}>{link.breadcrumb}</Link>
             </Flex>
