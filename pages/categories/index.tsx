@@ -8,15 +8,13 @@ interface CategoriesProps {
 
 const Categories: NextPage<CategoriesProps> = (props) => {
     return (
-        <div>
+        <ul>
             {props.categories.map((category: string) => (
-                <Link 
-                    href={`/categories/${category}`}
-                    key={category}
-                >{category}
+                <Link href={`/categories/${category}`} key={category}>
+                    <li>{category}</li>
                 </Link>
             ))}      
-        </div>
+        </ul>
     );
 }
 
