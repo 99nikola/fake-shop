@@ -1,4 +1,5 @@
 import { GetStaticProps, NextPage } from "next"
+import Link from "next/link";
 import { IUser } from "../../typescript/interfaces/Users";
 
 interface UsersProps {
@@ -7,9 +8,13 @@ interface UsersProps {
 
 const Users: NextPage<UsersProps> = (props) => {
     return (
-        <div>
-            
-        </div>
+        <ul>
+            {props.users.map(user => (
+                <Link key={user.id} href={`/users/${user.id}?${encodeURIComponent(user.name.firstname + " " + user.name.lastname)}`}>
+                    <li>{user.name.firstname} {user.name.lastname}</li>
+                </Link>
+            ))}
+        </ul>
     )
 }
 
