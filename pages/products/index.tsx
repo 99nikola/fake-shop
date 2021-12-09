@@ -11,8 +11,8 @@ const Products: NextPage<ProductsProps> = (props) => {
     return (
         <ul>
             {props.products.map(product => (
-                <Link href={`/categories/${encodeURIComponent(product.category)}/${product.id}?${encodeURIComponent(product.title)}`}>
-                    <li key={product.id}>{product.title}</li>    
+                <Link key={product.id} href={`/categories/${encodeURIComponent(product.category)}/${product.id}?${encodeURIComponent(product.title)}`}>
+                    <li>{product.title}</li>    
                 </Link>
             ))} 
         </ul>
