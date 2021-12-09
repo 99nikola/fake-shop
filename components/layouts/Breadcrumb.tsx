@@ -3,8 +3,10 @@ import { useRouter } from "next/router";
 import { useMemo } from "react";
 
 const map = new Map([
-   ["", "Home"],
-   ["categories", "Categories"]
+    ["categories", "Categories"],
+    ["products", "Products"],
+    ["users", "Users"],
+    ["carts", "Carts"]
 ]);
 
 const Breadcrumb: React.FC = () => {
@@ -12,6 +14,8 @@ const Breadcrumb: React.FC = () => {
     const router = useRouter();
 
     const Links = useMemo(() => {
+        if (router.asPath === "/")
+            return [];
         const arrPath = router.asPath.split("/");
         arrPath.shift();
 
