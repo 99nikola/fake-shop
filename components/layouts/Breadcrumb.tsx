@@ -12,19 +12,24 @@ const Breadcrumb: React.FC = () => {
     const router = useRouter();
 
     const Links = useMemo(() => {
-        const queryIndex = router.asPath.indexOf("?");
-        let path = router.asPath;
-
-        if (queryIndex !== -1) 
-            path = path.slice(0, queryIndex);
-
-        const arrPath = path.split("/");
+        const arrPath = router.asPath.split("/");
         arrPath.shift();
 
-        return arrPath.map((path, index) => ({
-            breadcrumb: map.has(path) ? map.get(path) : path,
-            href: "/" + arrPath.slice(0, index + 1).join("/")
-        }));
+        return arrPath.map((path, index) => {
+            if (path.indexOf("?") === -1) 
+                return ({
+                    breadcrumb: map.has(path) 
+                        ? map.get(path) 
+                        : decodeURIComponent(path),
+                    href: "/" + arrPath.slice(0, index + 1).join("/")
+                });
+                
+            const [, paramName ] = path.split("?");
+            return ({
+                breadcrumb: decodeURIComponent(paramName),
+                href: router.asPath
+            });
+        });
     }, [router.asPath]); 
 
     return (
