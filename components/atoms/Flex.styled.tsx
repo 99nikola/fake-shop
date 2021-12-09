@@ -8,8 +8,9 @@ interface FlexProps {
     margin?: string,
     border?: string,
     backgroundColor?: string,
-    width?: string
-    height?: string
+    width?: string,
+    height?: string,
+    color?: string
 }
 
 const Flex = styled.div<FlexProps>`
@@ -24,7 +25,7 @@ const Flex = styled.div<FlexProps>`
     width: ${({ width }) => width || "max-content"};
     height: ${({ height }) => height || "max-content"};
     border-radius: 6px;
-
+    color: ${({ color }) => color || "unset"};
 `;
 
 export default Flex;
