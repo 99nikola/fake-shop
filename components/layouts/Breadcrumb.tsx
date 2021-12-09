@@ -1,23 +1,31 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useMemo } from "react";
+import Flex from "../atoms/Flex.styled";
+import HeaderLink from "../atoms/HeaderLink";
 
 const map = new Map([
+    ["/", "Home"],
     ["categories", "Categories"],
     ["products", "Products"],
     ["users", "Users"],
-    ["carts", "Carts"]
+    ["carts", "Carts"],
+    ["login", "Login"]
 ]);
 
 const Breadcrumb: React.FC = () => {
 
     const router = useRouter();
 
-    const Links = useMemo(() => {
+    const links = useMemo(() => {
         if (router.asPath === "/")
-            return [];
+            return [{
+                breadcrumb: "Home",
+                href: "/"
+            }];
         const arrPath = router.asPath.split("/");
         arrPath.shift();
+        arrPath.unshift("/");
 
         return arrPath.map((path, index) => {
             if (path.indexOf("?") === -1) 
@@ -25,7 +33,7 @@ const Breadcrumb: React.FC = () => {
                     breadcrumb: map.has(path) 
                         ? map.get(path) 
                         : decodeURIComponent(path),
-                    href: "/" + arrPath.slice(0, index + 1).join("/")
+                    href: "/" + arrPath.slice(1, index + 1).join("/")
                 });
                 
             const [, paramName ] = path.split("?");
@@ -36,15 +44,21 @@ const Breadcrumb: React.FC = () => {
         });
     }, [router.asPath]); 
 
+    const BreadcrumbLinks = useMemo(() => (
+        links.map((link) => (
+            <Flex 
+                key={link.breadcrumb}
+                margin="0 5px"
+            >
+                <Link href={link.href}>{link.breadcrumb}</Link>
+            </Flex>
+        ))
+    ), [ links ]);
+
     return (
-        <div>
-            <Link href="/">Home</Link>
-            {Links.map((link) => (
-                <div key={link.breadcrumb}>
-                    <Link href={link.href}>{link.breadcrumb}</Link>
-                </div>
-            ))}
-        </div>
+        <Flex width="100%">
+            {BreadcrumbLinks}
+        </Flex>
     )
 }
 
