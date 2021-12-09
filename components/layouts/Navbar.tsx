@@ -8,7 +8,7 @@ const Navbar: React.FC = (props) => {
             <Link href="/users">Users</Link>
             <Link href="/products">Products</Link>
             <Link href="/categories">Categories</Link>
-            <Link href="/cart">Cart</Link>
+            <Link href="/carts">Carts</Link>
 
             <Breadcrumb />
 
