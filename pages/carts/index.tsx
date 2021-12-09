@@ -26,8 +26,8 @@ const Carts: NextPage<CartsProps> = (props) => {
 
 export const getStaticProps: GetStaticProps = async () => {
 
-    const response = await fetch("https://fakestoreapi.com/carts");
-    let carts = await response.json();
+    const res = await fetch("https://fakestoreapi.com/carts");
+    let carts = await res.json();
 
     console.log(carts);
     

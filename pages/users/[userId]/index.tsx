@@ -16,8 +16,8 @@ const User: NextPage<UserProps> = (props) => {
 export const getServerSideProps: GetServerSideProps = async (context) => {
 
     const userId = context.params?.userId;
-    const response = await fetch(`https://fakestoreapi.com/users/${userId}`);
-    const user = await response.json();
+    const res = await fetch(`https://fakestoreapi.com/users/${userId}`);
+    const user = await res.json();
 
     return ({
         props: {

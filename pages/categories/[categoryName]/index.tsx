@@ -21,8 +21,8 @@ const Category: NextPage<CategoryProps> = (props) => {
 export const getServerSideProps: GetServerSideProps = async (context) => {
 
     const categoryName = context.params?.categoryName;
-    const response = await fetch(`https://fakestoreapi.com/products/category/${categoryName}`);
-    const products = await response.json();
+    const res = await fetch(`https://fakestoreapi.com/products/category/${categoryName}`);
+    const products = await res.json();
 
     return ({
         props: {

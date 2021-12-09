@@ -20,8 +20,8 @@ const Users: NextPage<UsersProps> = (props) => {
 
 export const getStaticProps: GetStaticProps = async () => {
 
-    const response = await fetch("https://fakestoreapi.com/users");
-    const users = await response.json();
+    const res = await fetch("https://fakestoreapi.com/users");
+    const users = await res.json();
 
     return ({
         props: {

@@ -20,8 +20,8 @@ const Categories: NextPage<CategoriesProps> = (props) => {
 
 export const getStaticProps: GetStaticProps = async () => {
 
-    const response = await fetch("https://fakestoreapi.com/products/categories");
-    const categories = await response.json();
+    const res = await fetch("https://fakestoreapi.com/products/categories");
+    const categories = await res.json();
 
     return ({
         props: {

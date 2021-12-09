@@ -16,8 +16,8 @@ const Product: NextPage<ProductProps> = (props) => {
 export const getServerSideProps: GetServerSideProps = async (context) => {
 
     const productId = context.params?.productId as string;
-    const response = await fetch(`https://fakestoreapi.com/products/${productId}`);
-    const product = await response.json();
+    const res = await fetch(`https://fakestoreapi.com/products/${productId}`);
+    const product = await res.json();
 
     return ({
         props: {
