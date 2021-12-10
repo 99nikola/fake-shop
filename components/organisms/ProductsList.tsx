@@ -13,23 +13,23 @@ const ProductsList: React.FC<ProductsListProps> = (props) => {
 
     const { products, perPage } = useSelector((state: any) => state.products);
 
-    const ProductsToRender = usePagination({
+    const productsToRender = usePagination({
         items: products,
         page: props.page,
         perPage: perPage
     });
 
-    const Products = useMemo(() => (
-        ProductsToRender.map((product: IProduct) => (
+    const ProductsToRender = useMemo(() => (
+        productsToRender.map((product: IProduct) => (
             <Link key={product.id} href={`/categories/${encodeURIComponent(product.category)}/${product.id}?${encodeURIComponent(product.title)}`}>
                 <li>{product.title}</li>    
             </Link>
         ))
-    ), [ProductsToRender]);
+    ), [productsToRender]);
 
     return (
         <ul>
-            {Products}
+            {productsToRender}
             <Pagination 
                 currPage={props.page}
                 total={products.length}
