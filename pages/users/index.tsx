@@ -5,15 +5,15 @@ import { useMemo } from "react";
 import Pagination from "../../components/molecules/Pagination";
 import usePagination from "../../hooks/usePagination";
 import { IUser } from "../../typescript/interfaces/Users";
+import getPage from "../../utils/getPage";
 
 interface UsersProps {
     users: IUser[]
 }
 
 const Users: NextPage<UsersProps> = (props) => {
-    const router = useRouter();
-    const page = useMemo(() => Number.parseInt(router.query?.page as string) || 1, [router.query]);
-    console.log(props.users.length);
+    const page = getPage();
+
     const usersToRender = usePagination({
         items: props.users,
         page,
