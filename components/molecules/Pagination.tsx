@@ -27,7 +27,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     }, [numberOfButtons, router.pathname]);
 
     return (
-        <Flex>
+        <Flex margin="10px">
             {Buttons}
         </Flex>
     )
