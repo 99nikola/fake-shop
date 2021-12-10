@@ -2,7 +2,6 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useMemo } from "react";
 import Flex from "../atoms/Flex.styled";
-import HeaderLink from "../atoms/HeaderLink";
 import StyledLink from "../atoms/StyledLink.styled";
 
 const map = new Map([
@@ -51,7 +50,7 @@ const Breadcrumb: React.FC = () => {
                 <StyledLink last={i === (links.length-1)}>{link.breadcrumb}</StyledLink>
             </Link>
         ))
-    ), [ links ]);
+    ), [links]);
 
     return (
         <Flex 

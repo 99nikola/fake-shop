@@ -12,7 +12,7 @@ interface PaginationProps {
 const Pagination: React.FC<PaginationProps> = (props) => {
 
     const numberOfButtons = useMemo(() => Math.ceil(props.total / props.perPage), [props.total, props.perPage]);
-    const { pathname } = useRouter();
+    const router = useRouter();
 
     const Buttons = useMemo(() => {
         let buttons = [];
@@ -21,10 +21,11 @@ const Pagination: React.FC<PaginationProps> = (props) => {
                 <PaginationLink 
                     key={i}
                     page={i}
+                    path={router?.pathname}
                 />
             ));
         return buttons;
-    }, [numberOfButtons, pathname]);
+    }, [numberOfButtons, router?.pathname]);
 
     return (
         <Flex margin="10px">
