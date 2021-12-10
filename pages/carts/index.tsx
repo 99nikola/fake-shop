@@ -29,8 +29,6 @@ export const getStaticProps: GetStaticProps = async () => {
     const res = await fetch("https://fakestoreapi.com/carts");
     let carts = await res.json();
 
-    console.log(carts);
-    
     return ({
         props: {
             carts

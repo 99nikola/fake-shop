@@ -16,8 +16,7 @@ const Login: NextPage = () => {
             height="100%"
             justifyContent="center"
         >
-            <LoginForm 
-            />
+            <LoginForm />
         </Flex>
     );
 }
