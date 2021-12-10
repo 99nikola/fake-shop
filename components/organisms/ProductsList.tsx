@@ -29,7 +29,7 @@ const ProductsList: React.FC<ProductsListProps> = (props) => {
 
     return (
         <ul>
-            {productsToRender}
+            {ProductsToRender}
             <Pagination 
                 currPage={props.page}
                 total={products.length}
