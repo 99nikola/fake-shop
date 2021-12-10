@@ -1,22 +1,15 @@
 import { NextPage } from "next"
-import Link from "next/link";
-import { useSelector } from "react-redux";
+import Flex from "../../components/atoms/Flex.styled";
+import ProductsList from "../../components/organisms/ProductsList";
 import { wrapper } from "../../store";
 import { setDefaults } from "../../store/products/ProductsActions";
 import { IProduct } from "../../typescript/interfaces/Products";
 
 const Products: NextPage = () => {
-
-    const { products, perPage } = useSelector((state: any) => state.products);
-    console.log(perPage);
     return (
-        <ul>
-            {products.map((product: IProduct) => (
-                <Link key={product.id} href={`/categories/${encodeURIComponent(product.category)}/${product.id}?${encodeURIComponent(product.title)}`}>
-                    <li>{product.title}</li>    
-                </Link>
-            ))} 
-        </ul>
+        <Flex>
+            <ProductsList />
+        </Flex>
     );
 }
 export const getStaticProps = wrapper.getStaticProps(store => async (context) => {
@@ -26,7 +19,7 @@ export const getStaticProps = wrapper.getStaticProps(store => async (context) =>
 
     store.dispatch(setDefaults({
         products: products,
-        perPage: 10
+        perPage: 5
     }));
 
     return ({
