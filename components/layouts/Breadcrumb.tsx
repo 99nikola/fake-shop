@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { useMemo } from "react";
 import Flex from "../atoms/Flex.styled";
 import HeaderLink from "../atoms/HeaderLink";
+import StyledLink from "../atoms/StyledLink.styled";
 
 const map = new Map([
     ["/", "Home"],
@@ -45,19 +46,18 @@ const Breadcrumb: React.FC = () => {
     }, [router.asPath]); 
 
     const BreadcrumbLinks = useMemo(() => (
-        links.map((link) => (
-            <Flex 
-                key={link.breadcrumb}
-                margin="0 5px"
-                color="darkblue"
-            >
-                <Link href={link.href}>{link.breadcrumb}</Link>
-            </Flex>
+        links.map((link, i) => (
+            <Link href={link.href}>
+                <StyledLink last={i === (links.length-1)}>{link.breadcrumb}</StyledLink>
+            </Link>
         ))
     ), [ links ]);
 
     return (
-        <Flex width="100%">
+        <Flex 
+            width="100%"
+            margin="20px 0"
+        >
             {BreadcrumbLinks}
         </Flex>
     )
