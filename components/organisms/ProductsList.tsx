@@ -1,23 +1,23 @@
 import Link from "next/link";
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
-import { usePage } from "../../hooks/usePageNumber";
+import usePagination from "../../hooks/usePagination";
 import { IProduct } from "../../typescript/interfaces/Products";
 import Pagination from "../molecules/Pagination";
 
-const ProductsList: React.FC = () => {
+interface ProductsListProps {
+    page: number
+}
+
+const ProductsList: React.FC<ProductsListProps> = (props) => {
 
     const { products, perPage } = useSelector((state: any) => state.products);
-    const page = usePage();
 
-    const ProductsToRender = useMemo(() => {
-        const productsToRender = [];
-
-        for (let i=(page-1) * perPage; i<page * perPage; i++) 
-            productsToRender.push(products[i]);
-
-        return productsToRender; 
-    }, [products, perPage, page]);
+    const ProductsToRender = usePagination({
+        items: products,
+        page: props.page,
+        perPage: perPage
+    });
 
     const Products = useMemo(() => (
         ProductsToRender.map((product: IProduct) => (
@@ -31,8 +31,9 @@ const ProductsList: React.FC = () => {
         <ul>
             {Products}
             <Pagination 
-                currPage={page}
-                productsLength={products.length}
+                currPage={props.page}
+                total={products.length}
+                perPage={perPage}
             />
         </ul>
     )

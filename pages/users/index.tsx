@@ -1,5 +1,9 @@
 import { GetStaticProps, NextPage } from "next"
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { useMemo } from "react";
+import Pagination from "../../components/molecules/Pagination";
+import usePagination from "../../hooks/usePagination";
 import { IUser } from "../../typescript/interfaces/Users";
 
 interface UsersProps {
@@ -7,13 +11,32 @@ interface UsersProps {
 }
 
 const Users: NextPage<UsersProps> = (props) => {
+    const router = useRouter();
+    const page = useMemo(() => Number.parseInt(router.query?.page as string) || 1, [router.query]);
+    console.log(props.users.length);
+    const usersToRender = usePagination({
+        items: props.users,
+        page,
+        perPage: 3
+    });
+
+    const UsersToRender = useMemo(() => (
+        usersToRender.map(user => (
+            <Link key={user.id} href={`/users/${user.id}?${encodeURIComponent(user.name.firstname + " " + user.name.lastname)}`}>
+                <li>{user.name.firstname} {user.name.lastname}</li>
+            </Link>
+        ))
+    ), [usersToRender]);
+
+
     return (
         <ul>
-            {props.users.map(user => (
-                <Link key={user.id} href={`/users/${user.id}?${encodeURIComponent(user.name.firstname + " " + user.name.lastname)}`}>
-                    <li>{user.name.firstname} {user.name.lastname}</li>
-                </Link>
-            ))}
+            {UsersToRender}
+            <Pagination 
+                currPage={page}
+                total={props.users.length}
+                perPage={3}
+            />
         </ul>
     )
 }

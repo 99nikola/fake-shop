@@ -47,7 +47,7 @@ const Breadcrumb: React.FC = () => {
 
     const BreadcrumbLinks = useMemo(() => (
         links.map((link, i) => (
-            <Link href={link.href}>
+            <Link key={link.breadcrumb} href={link.href}>
                 <StyledLink last={i === (links.length-1)}>{link.breadcrumb}</StyledLink>
             </Link>
         ))
