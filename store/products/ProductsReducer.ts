@@ -1,16 +1,34 @@
 import { HYDRATE } from "next-redux-wrapper";
 import { AnyAction } from "redux";
-import { IProduct } from "../../typescript/interfaces/Products";
+import { ProductsRedux } from "../../typescript/interfaces/Products";
 import { EProductsActions } from "./ProductsActions";
 
-export const initialState: IProduct[] = [];
+export const initialState: ProductsRedux = {
+    products: [],
+    perPage: 5
+};
 
 const ProductsReducer = (state = initialState, action: AnyAction) => {
     switch (action.type) {
         case HYDRATE:
-            return action.payload;
+            return ({
+                ...state,
+                ...action.payload.products
+            });
+        case EProductsActions.SET_DEFAULTS: 
+            return ({
+                ...action.payload
+            });
         case EProductsActions.SET_PRODUCTS:
-            return action.payload;
+            return ({
+                ...state,
+                products: action.payload
+            });
+        case EProductsActions.SET_PER_PAGE:
+            return ({
+                ...state,
+                perPage: action.payload
+            })
         default: 
             return state;
     }

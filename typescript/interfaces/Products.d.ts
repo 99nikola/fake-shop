@@ -10,3 +10,9 @@ export interface IProduct {
 export type ProductType = typeof IProduct;
 export type ProductKeys = keyof ProductType;	
 export type ProductValues = ProductType[ProductKeys];
+
+
+export interface ProductsRedux {
+    products: IProduct[],
+    perPage: number
+}

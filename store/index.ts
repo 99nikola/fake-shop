@@ -1,7 +1,7 @@
 import { Context, createWrapper } from "next-redux-wrapper";
 import { createStore, combineReducers, compose, applyMiddleware, Store } from "redux";
 import thunk from "redux-thunk";
-import ProductsReducer, { initialState } from "./products/ProductsReducer";
+import ProductsReducer from "./products/ProductsReducer";
 
 const reducers = combineReducers({
     products: ProductsReducer
