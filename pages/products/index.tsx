@@ -1,16 +1,16 @@
 import { GetStaticProps, NextPage } from "next"
 import Link from "next/link";
+import { useSelector } from "react-redux";
+import { wrapper } from "../../store";
+import { setProducts } from "../../store/products/ProductsActions";
 import { IProduct } from "../../typescript/interfaces/Products";
 
-interface ProductsProps {
-    products: IProduct[]
-}
+const Products: NextPage = () => {
 
-const Products: NextPage<ProductsProps> = (props) => {
-
+    const { products } = useSelector((state: any) => state.products);
     return (
         <ul>
-            {props.products.map(product => (
+            {products.map((product: IProduct) => (
                 <Link key={product.id} href={`/categories/${encodeURIComponent(product.category)}/${product.id}?${encodeURIComponent(product.title)}`}>
                     <li>{product.title}</li>    
                 </Link>
@@ -18,18 +18,16 @@ const Products: NextPage<ProductsProps> = (props) => {
         </ul>
     );
 }
-
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps = wrapper.getStaticProps(store => async (context) => {
 
     const res = await fetch("https://fakestoreapi.com/products");
     const products = await res.json();
 
+    store.dispatch(setProducts(products));
 
     return ({
-        props: {
-            products
-        }
+        props: {}
     });
-}
+});
 
 export default Products;

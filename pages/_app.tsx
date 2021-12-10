@@ -1,8 +1,9 @@
 import "../styles/globals.css"
 import type { AppProps } from "next/app"
 import Navbar from "../components/layouts/Navbar"
+import { wrapper } from "../store";
 
-const MyApp = ({ Component, pageProps }: AppProps) => {
+const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
 	return (
 		<Navbar>
 			<Component {...pageProps} />
@@ -10,4 +11,4 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
 	);
 }
 
-export default MyApp;
+export default wrapper.withRedux(MyApp);
