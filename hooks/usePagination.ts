@@ -1,23 +1,28 @@
 import { useMemo } from "react";
+import { getPage, getPerPage } from "../utils/routerQuery";
 
 interface PaginateProps {
-    page: number,
-    perPage: number,
-    items: any[]
+    items: any[],
+    perPage?: number,
+    page?: number
 }
 
 const usePagination = (props: PaginateProps) => {
+
+    const perPage = props.perPage || getPerPage();
+    const page = props.page || getPage();
+
     const ItemsToRender = useMemo(() => {
         const itemsToRender = [];
-        const top = props.page * props.perPage;
+        const top = page * perPage;
         const cap = props.items.length < top 
             ? props.items.length
             : top;
             
-        for (let i=(props.page-1) * props.perPage; i<cap; i++) 
+        for (let i=(page-1) * perPage; i<cap; i++) 
             itemsToRender.push(props.items[i]);
         return itemsToRender; 
-    }, [props.page, props.perPage, props.items]);
+    }, [page, props, props.items]);
 
     return ItemsToRender;
 }

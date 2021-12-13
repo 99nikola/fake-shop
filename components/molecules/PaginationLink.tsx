@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { useCallback } from "react";
+import { setPage } from "../../utils/routerQuery";
 
 interface PaginationLinkProps {
     page: number,
@@ -8,10 +9,10 @@ interface PaginationLinkProps {
 const PaginationLink: React.FC<PaginationLinkProps> = (props) => {
 
     const router = useRouter();
-    const onSelect = useCallback(() => {
-        router?.replace(props.path + "?page=" + props.page);
-    }, [router?.replace]);
 
+    const onSelect = useCallback(() => {
+        setPage(router, props.page.toString());
+    }, [router]);
     return (
         <button onClick={onSelect}>{props.page}</button>
     );
