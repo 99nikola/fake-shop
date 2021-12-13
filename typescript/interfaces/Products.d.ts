@@ -13,6 +13,5 @@ export type ProductValues = ProductType[ProductKeys];
 
 
 export interface ProductsRedux {
-    products: IProduct[],
-    perPage: number
+    products: IProduct[]
 }

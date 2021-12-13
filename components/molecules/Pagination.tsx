@@ -1,18 +1,21 @@
 import { useRouter } from "next/router";
 import { useMemo } from "react";
+import { useSelector } from "react-redux";
 import Flex from "../atoms/Flex.styled";
 import PaginationLink from "./PaginationLink";
+import PerPage from "./PerPage";
 
 interface PaginationProps {
-    currPage: number,
     total: number,
-    perPage: number
+    currPage?: number
 }
 
 const Pagination: React.FC<PaginationProps> = (props) => {
 
-    const numberOfButtons = useMemo(() => Math.ceil(props.total / props.perPage), [props.total, props.perPage]);
     const router = useRouter();
+    const pagination = useSelector((state: any) => state.pagination);
+
+    const numberOfButtons = useMemo(() => Math.ceil(props.total / pagination.perPage), [props.total, pagination.perPage]);
 
     const Buttons = useMemo(() => {
         let buttons = [];
@@ -21,17 +24,18 @@ const Pagination: React.FC<PaginationProps> = (props) => {
                 <PaginationLink 
                     key={i}
                     page={i}
-                    path={router?.pathname}
+                    path={router.pathname}
                 />
             ));
         return buttons;
-    }, [numberOfButtons, router?.pathname]);
+    }, [numberOfButtons, router.pathname]);
 
     return (
         <Flex margin="10px">
             {Buttons}
+            <PerPage />
         </Flex>
-    )
+    );
 }
 
 export default Pagination;

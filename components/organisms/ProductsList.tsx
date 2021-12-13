@@ -11,12 +11,10 @@ interface ProductsListProps {
 
 const ProductsList: React.FC<ProductsListProps> = (props) => {
 
-    const { products, perPage } = useSelector((state: any) => state.products);
+    const products = useSelector((state: any) => state.products);
 
     const productsToRender = usePagination({
-        items: products,
-        page: props.page,
-        perPage: perPage
+        items: products
     });
 
     const ProductsToRender = useMemo(() => (
@@ -31,9 +29,7 @@ const ProductsList: React.FC<ProductsListProps> = (props) => {
         <ul>
             {ProductsToRender}
             <Pagination 
-                currPage={props.page}
                 total={products.length}
-                perPage={perPage}
             />
         </ul>
     )

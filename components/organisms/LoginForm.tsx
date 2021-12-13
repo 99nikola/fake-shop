@@ -1,5 +1,5 @@
 import { Controller, SubmitErrorHandler, SubmitHandler, useForm } from "react-hook-form";
-import { requiredRule } from "../../rules/LoginForm";
+import { requiredRule } from "../../rules";
 import { ILoginForm } from "../../typescript/interfaces/LoginForm";
 import Input from "../atoms/Input.styled";
 import Button from "../atoms/Button.styled";
@@ -57,7 +57,7 @@ const LoginForm: React.FC = () => {
                             ref={field.ref}
                             
                             placeholder="Username"
-                            aria-invalid={Boolean(fieldState.error)}
+                            error={Boolean(fieldState.error)}
                             errorMessage={fieldState.error?.message}
                         />
                     )}
