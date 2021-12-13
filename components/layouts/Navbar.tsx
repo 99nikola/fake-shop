@@ -13,27 +13,31 @@ const Navbar: React.FC = (props) => {
                 justifyContent="space-evenly"
                 alignItems="center"
             >   
-                <HeaderLink>
-                    <Link  href="/">Home</Link>
-                </HeaderLink>
-                <HeaderLink>
-                    <Link href="/users">Users</Link>
-                </HeaderLink>
-                <HeaderLink>
-                    <Link href="/products">Products</Link>
-                </HeaderLink>
-                <HeaderLink>
-                    <Link href="/categories">Categories</Link>
-                </HeaderLink>
-
-                <HeaderLink>
-                    <Link href="/carts">Carts</Link>
-                </HeaderLink>
-                <HeaderLink>
-                    <Link href="/login">Login</Link>
-                </HeaderLink>
+                <Link  href="/">
+                    <HeaderLink>Home</HeaderLink>
+                </Link>
+                <Link  href="/">
+                    <HeaderLink>Home</HeaderLink>
+                </Link>
+                <Link  href="/users">
+                    <HeaderLink>Users</HeaderLink>
+                </Link>
+                <Link  href="/products">
+                    <HeaderLink>Products</HeaderLink>
+                </Link>
+                <Link  href="/categoires">
+                    <HeaderLink>Categories</HeaderLink>
+                </Link>
+                <Link  href="/carts">
+                    <HeaderLink>Carts</HeaderLink>
+                </Link>
+                <Link  href="/login">
+                    <HeaderLink>Login</HeaderLink>
+                </Link>
             </Flex>
+
             <Breadcrumb />
+            
             <main>
                 {props.children}
             </main>
