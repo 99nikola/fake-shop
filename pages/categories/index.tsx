@@ -1,23 +1,18 @@
-import { GetStaticProps, NextPage } from "next"
+import { NextPage } from "next"
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { useMemo } from "react";
-import Pagination from "../../components/molecules/Pagination";
+import { useSelector } from "react-redux";
+import Pagination from "../../components/organisms/Pagination";
 import usePagination from "../../hooks/usePagination";
-import getPage from "../../utils/getPage";
+import { wrapper } from "../../store";
+import { setCategories } from "../../store/categories/CategoriesActions";
 
-interface CategoriesProps {
-    categories: string[]
-}
+const Categories: NextPage = () => {
 
-const Categories: NextPage<CategoriesProps> = (props) => {
-
-    const page = getPage();
+    const categories = useSelector((state: any) => state.categories);
 
     const categoriesToRender = usePagination({
-        items: props.categories,
-        perPage: 2,
-        page
+        items: categories
     });
 
     const CategoriesToRender = useMemo(() => (
@@ -32,24 +27,21 @@ const Categories: NextPage<CategoriesProps> = (props) => {
         <ul>
             {CategoriesToRender} 
             <Pagination 
-                currPage={page}
-                perPage={2}
-                total={props.categories.length}
+                total={categories.length}
             />
         </ul>
     );
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+Categories.getInitialProps = wrapper.getInitialPageProps(store => async (context) => {
+    
+    if (store.getState().categories.length !== 0)
+        return;
 
     const res = await fetch("https://fakestoreapi.com/products/categories");
     const categories = await res.json();
-
-    return ({
-        props: {
-            categories
-        }
-    });
-}
+    
+    store.dispatch(setCategories(categories));
+});
 
 export default Categories;

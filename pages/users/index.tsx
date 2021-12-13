@@ -1,23 +1,18 @@
-import { GetStaticProps, NextPage } from "next"
+import { GetStaticProps, NextPage, NextPageContext } from "next"
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { useMemo } from "react";
-import Pagination from "../../components/molecules/Pagination";
+import { useSelector } from "react-redux";
+import Pagination from "../../components/organisms/Pagination";
 import usePagination from "../../hooks/usePagination";
-import { IUser } from "../../typescript/interfaces/Users";
-import getPage from "../../utils/getPage";
+import { wrapper } from "../../store";
+import { setUsers } from "../../store/users/UsersActions";
 
-interface UsersProps {
-    users: IUser[]
-}
+const Users: NextPage = () => {
 
-const Users: NextPage<UsersProps> = (props) => {
-    const page = getPage();
+    const users = useSelector((state: any) => state.users);
 
     const usersToRender = usePagination({
-        items: props.users,
-        page,
-        perPage: 3
+        items: users
     });
 
     const UsersToRender = useMemo(() => (
@@ -28,29 +23,25 @@ const Users: NextPage<UsersProps> = (props) => {
         ))
     ), [usersToRender]);
 
-
     return (
         <ul>
             {UsersToRender}
             <Pagination 
-                currPage={page}
-                total={props.users.length}
-                perPage={3}
+                total={users.length}
             />
         </ul>
     )
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+Users.getInitialProps = wrapper.getInitialPageProps(store => async (context) => {
+    
+    if (store.getState().users.length !== 0)
+        return;
 
     const res = await fetch("https://fakestoreapi.com/users");
     const users = await res.json();
-
-    return ({
-        props: {
-            users
-        }
-    })
-}
+    
+    store.dispatch(setUsers(users));
+});
 
 export default Users;

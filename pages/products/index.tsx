@@ -2,34 +2,45 @@ import { NextPage } from "next"
 import Flex from "../../components/atoms/Flex.styled";
 import ProductsList from "../../components/organisms/ProductsList";
 import { wrapper } from "../../store";
-import { setDefaults } from "../../store/products/ProductsActions";
+import { setProducts } from "../../store/products/ProductsActions";
 import { IProduct } from "../../typescript/interfaces/Products";
-import getPage from "../../utils/getPage";
 
 const Products: NextPage = () => {
-    const page = getPage();
-
     return (
         <Flex>
-            <ProductsList 
-                page={page}
-            />
+            <ProductsList />
         </Flex>
     );
 }
-export const getStaticProps = wrapper.getStaticProps(store => async (context) => {
+
+Products.getInitialProps = wrapper.getInitialPageProps(store => async (context) => {
+    
+    if (store.getState().products.length !== 0)
+        return;
 
     const res = await fetch("https://fakestoreapi.com/products");
     const products: IProduct[] = await res.json();
 
-    store.dispatch(setDefaults({
-        products: products,
-        perPage: 5
-    }));
-
-    return ({
-        props: {}
-    });
+    store.dispatch(setProducts(products));
 });
+
+// export const getStaticProps = wrapper.getStaticProps(store => async (context) => {
+
+//     console.log(store.getState());
+    
+//     if (store.getState().products.length === 0) {
+//         console.log("fetching");
+//         const res = await fetch("https://fakestoreapi.com/products");
+//         const products: IProduct[] = await res.json();
+
+//         store.dispatch(setProducts(products));
+//     } else {
+//         console.log("not fetching");
+//     }
+
+//     return ({
+//         props: {}
+//     });
+// });
 
 export default Products;

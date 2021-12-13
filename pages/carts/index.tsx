@@ -1,39 +1,47 @@
-import { GetStaticProps, NextPage } from "next";
+import { NextPage } from "next";
 import { useMemo } from "react";
-import { ICartUser } from "../../typescript/interfaces/Cart";
+import { useSelector } from "react-redux";
+import Pagination from "../../components/organisms/Pagination";
+import usePagination from "../../hooks/usePagination";
+import { wrapper } from "../../store";
+import { setCarts } from "../../store/carts/CartsActions";
 
-interface CartsProps {
-    carts: ICartUser[]
-}
+const Carts: NextPage = () => {
 
-const Carts: NextPage<CartsProps> = (props) => {
-
-    const Dates = useMemo(() => (
-        props.carts.map(cart => {
+    const carts = useSelector((state: any) => state.carts);
+    
+    const cartsToRender = usePagination({
+        items: carts
+    });
+    
+    const CartsToRender = useMemo(() => (
+        cartsToRender.map(cart => {
             const date = new Date(cart.date);
             return (
                 <li key={cart.id + cart.userId}>{date.toDateString()}</li>
             );
         })
-    ), [props.carts])
+    ), [cartsToRender]);
 
     return (
         <ul>
-            {Dates}
+            {CartsToRender}
+            <Pagination 
+                total={carts.length}
+            />
         </ul>
-    )
+    );
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+Carts.getInitialProps = wrapper.getInitialPageProps(store => async (context) => {
+    
+    if (store.getState().carts.length !== 0)
+        return;
 
     const res = await fetch("https://fakestoreapi.com/carts");
     let carts = await res.json();
-
-    return ({
-        props: {
-            carts
-        }
-    })
-}
+    
+    store.dispatch(setCarts(carts));
+});
 
 export default Carts;
