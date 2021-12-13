@@ -16,16 +16,13 @@ const Navbar: React.FC = (props) => {
                 <Link  href="/">
                     <HeaderLink>Home</HeaderLink>
                 </Link>
-                <Link  href="/">
-                    <HeaderLink>Home</HeaderLink>
-                </Link>
                 <Link  href="/users">
                     <HeaderLink>Users</HeaderLink>
                 </Link>
                 <Link  href="/products">
                     <HeaderLink>Products</HeaderLink>
                 </Link>
-                <Link  href="/categoires">
+                <Link  href="/categories">
                     <HeaderLink>Categories</HeaderLink>
                 </Link>
                 <Link  href="/carts">
