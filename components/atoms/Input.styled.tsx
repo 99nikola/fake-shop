@@ -1,6 +1,6 @@
-import { forwardRef, HTMLInputTypeAttribute, LegacyRef, RefAttributes } from "react";
+import { forwardRef, HTMLInputTypeAttribute, LegacyRef } from "react";
 import { RefCallBack } from "react-hook-form";
-import styled, { StyledComponent, StyledProps } from "styled-components";
+import styled from "styled-components";
 
 interface InputProps extends StyledInputProps {
     errorMessage?: string,
