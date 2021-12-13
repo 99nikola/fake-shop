@@ -72,7 +72,7 @@ const LoginForm: React.FC = () => {
                             {...field}
                             type="password"
                             placeholder="Password"
-                            aria-invalid={Boolean(fieldState.error)}
+                            error={Boolean(fieldState.error)}
                             errorMessage={fieldState.error?.message}
                         />
                     )}

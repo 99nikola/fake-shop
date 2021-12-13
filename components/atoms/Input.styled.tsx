@@ -9,14 +9,15 @@ interface InputProps extends StyledInputProps {
     type?: HTMLInputTypeAttribute,
     value?: string,
     onChange?: (e: any) => void,
-    ref?: RefCallBack
+    ref?: RefCallBack,
+    error?: boolean
 }
 
 const Input = forwardRef((props: InputProps, ref: LegacyRef<HTMLInputElement>) => {
-    const { width, errorMessage, type, ...rest } = props;
+    const { width, errorMessage, type, error, ...rest } = props;
     return (
         <StyledInput width={width}>
-            <input {...rest} ref={ref} type={type}/>
+            <input {...rest} ref={ref} type={type} aria-invalid={error}/>
             <p className="error-message">{errorMessage || ""}</p>
         </StyledInput>
     )
