@@ -25,7 +25,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     const paths = products.map(product => ({
         params: {
             productId: product.id.toString(),
-            categoryName: product.category
+            categoryName: encodeURIComponent(product.category)
         }
     }));
 

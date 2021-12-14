@@ -22,7 +22,7 @@ const Carts: NextPage = () => {
                 return (
                     <li key={cart.id + cart.userId}>{date.toDateString()}</li>
                 )})
-    ), [cartsToRender]);
+    ), [cartsToRender, isFetching]);
 
     return (
         <ul>
