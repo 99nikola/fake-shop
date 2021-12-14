@@ -23,6 +23,8 @@ const Input = forwardRef((props: InputProps, ref: LegacyRef<HTMLInputElement>) =
     )
 });
 
+Input.displayName = "InputField";
+
 interface StyledInputProps {
     width?: string | number
 }

@@ -22,7 +22,7 @@ const Categories: NextPage = () => {
                 <Link href={`/categories/${category}`} key={category}>
                     <li>{category}</li>
                 </Link>))
-    ), [categoriesToRender]);
+    ), [categoriesToRender, isFetching]);
 
     return (
         <ul>

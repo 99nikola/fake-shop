@@ -12,7 +12,7 @@ const PaginationLink: React.FC<PaginationLinkProps> = (props) => {
 
     const onSelect = useCallback(() => {
         setPage(router, props.page.toString());
-    }, [router]);
+    }, [router, props.page]);
     return (
         <button onClick={onSelect}>{props.page}</button>
     );
