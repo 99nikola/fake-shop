@@ -12,8 +12,6 @@ export const setPage = (router: NextRouter, page: string) => {
         ...router.query,
         page
     };
-
-    console.log(query);
     
     router.replace({
         pathname: router.pathname,

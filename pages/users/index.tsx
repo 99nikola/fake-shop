@@ -5,11 +5,11 @@ import { useSelector } from "react-redux";
 import Pagination from "../../components/organisms/Pagination";
 import usePagination from "../../hooks/usePagination";
 import { wrapper } from "../../store";
-import { setUsers } from "../../store/users/UsersActions";
+import { fetchUsers, setUsers } from "../../store/users/UsersActions";
 
 const Users: NextPage = () => {
 
-    const users = useSelector((state: any) => state.users);
+    const { users } = useSelector((state: any) => state.users);
 
     const usersToRender = usePagination({
         items: users
@@ -33,15 +33,13 @@ const Users: NextPage = () => {
     )
 }
 
-Users.getInitialProps = wrapper.getInitialPageProps(store => async (context) => {
+Users.getInitialProps = wrapper.getInitialPageProps(store => () => {
     
-    if (store.getState().users.length !== 0)
+    const state = store.getState().users;
+    if (state.isFetching || state.users.length !== 0)
         return;
-
-    const res = await fetch("https://fakestoreapi.com/users");
-    const users = await res.json();
     
-    store.dispatch(setUsers(users));
+    store.dispatch(fetchUsers() as any);
 });
 
 export default Users;

@@ -5,11 +5,11 @@ import { useSelector } from "react-redux";
 import Pagination from "../../components/organisms/Pagination";
 import usePagination from "../../hooks/usePagination";
 import { wrapper } from "../../store";
-import { setCategories } from "../../store/categories/CategoriesActions";
+import { fetchCategories } from "../../store/categories/CategoriesActions";
 
 const Categories: NextPage = () => {
 
-    const categories = useSelector((state: any) => state.categories);
+    const { categories } = useSelector((state: any) => state.categories);
 
     const categoriesToRender = usePagination({
         items: categories
@@ -33,15 +33,13 @@ const Categories: NextPage = () => {
     );
 }
 
-Categories.getInitialProps = wrapper.getInitialPageProps(store => async (context) => {
+Categories.getInitialProps = wrapper.getInitialPageProps(store => () => {
     
-    if (store.getState().categories.length !== 0)
+    const state = store.getState().categories;
+    if (state.isFetching || state.categories.length !== 0)
         return;
-
-    const res = await fetch("https://fakestoreapi.com/products/categories");
-    const categories = await res.json();
     
-    store.dispatch(setCategories(categories));
+    store.dispatch(fetchCategories() as any);
 });
 
 export default Categories;

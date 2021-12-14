@@ -7,7 +7,7 @@ import Pagination from "./Pagination";
 
 const ProductsList: React.FC = () => {
 
-    const products = useSelector((state: any) => state.products);
+    const { products } = useSelector((state: any) => state.products);
     
     const productsToRender = usePagination({
         items: products
