@@ -8,19 +8,20 @@ import { fetchCarts } from "../../store/carts/CartsActions";
 
 const Carts: NextPage = () => {
 
-    const { carts } = useSelector((state: any) => state.carts);
+    const { carts, isFetching } = useSelector((state: any) => state.carts);
     
     const cartsToRender = usePagination({
         items: carts
     });
     
     const CartsToRender = useMemo(() => (
-        cartsToRender.map(cart => {
-            const date = new Date(cart.date);
-            return (
-                <li key={cart.id + cart.userId}>{date.toDateString()}</li>
-            );
-        })
+        isFetching
+            ? "Loading"
+            : cartsToRender.map(cart => {
+                const date = new Date(cart.date);
+                return (
+                    <li key={cart.id + cart.userId}>{date.toDateString()}</li>
+                )})
     ), [cartsToRender]);
 
     return (

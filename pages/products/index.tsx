@@ -1,15 +1,37 @@
 import { NextPage } from "next"
-import Flex from "../../components/atoms/Flex.styled";
-import ProductsList from "../../components/organisms/ProductsList";
+import Link from "next/link";
+import { useMemo } from "react";
+import { useSelector } from "react-redux";
+import Pagination from "../../components/organisms/Pagination";
+import usePagination from "../../hooks/usePagination";
 import { wrapper } from "../../store";
 import { fetchProducts } from "../../store/products/ProductsActions";
+import { IProduct } from "../../typescript/interfaces/Products";
 
 const Products: NextPage = () => {
+    const { products, isFetching } = useSelector((state: any) => state.products);
+    
+    const productsToRender = usePagination({
+        items: products
+    });
+
+    const ProductsToRender = useMemo(() => (
+        isFetching
+            ? "Loading"
+            : productsToRender.map((product: IProduct) => (
+                <Link key={product.id} href={`/categories/${encodeURIComponent(product.category)}/${product.id}?${encodeURIComponent(product.title)}`}>
+                    <li>{product.title}</li>    
+                </Link>))
+    ), [productsToRender, isFetching]);
+
     return (
-        <Flex>
-            <ProductsList />
-        </Flex>
-    );
+        <ul>
+            {ProductsToRender}
+            <Pagination 
+                total={products.length}
+            />
+        </ul>
+    )
 }
 
 Products.getInitialProps = wrapper.getInitialPageProps(store => () => {

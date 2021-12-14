@@ -9,18 +9,19 @@ import { fetchCategories } from "../../store/categories/CategoriesActions";
 
 const Categories: NextPage = () => {
 
-    const { categories } = useSelector((state: any) => state.categories);
+    const { categories, isFetching } = useSelector((state: any) => state.categories);
 
     const categoriesToRender = usePagination({
         items: categories
     });
 
     const CategoriesToRender = useMemo(() => (
-        categoriesToRender.map((category: string) => (
-            <Link href={`/categories/${category}`} key={category}>
-                <li>{category}</li>
-            </Link>
-        ))
+        isFetching
+            ? "Loading"
+            : categoriesToRender.map((category: string) => (
+                <Link href={`/categories/${category}`} key={category}>
+                    <li>{category}</li>
+                </Link>))
     ), [categoriesToRender]);
 
     return (
