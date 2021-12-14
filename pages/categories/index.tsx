@@ -21,7 +21,7 @@ const Categories: NextPage = () => {
         isFetching
             ? "Loading"
             : categoriesToRender.map((category: string) => (
-                <Link href={"/categories/" + category} key={category}>
+                <Link href={"/categories/" + encodeURIComponent(category)} key={category}>
                     <li>{category}</li>
                 </Link>))
     ), [categoriesToRender, isFetching]);
