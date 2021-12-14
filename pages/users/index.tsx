@@ -2,6 +2,8 @@ import { NextPage } from "next"
 import Link from "next/link";
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
+import { UsersBreadcrumb } from "../../breadcrumb";
+import Breadcrumb from "../../components/molecules/Breadcrumb";
 import Pagination from "../../components/organisms/Pagination";
 import usePagination from "../../hooks/usePagination";
 import { wrapper } from "../../store";
@@ -18,18 +20,23 @@ const Users: NextPage = () => {
         isFetching
             ? "Loading"
             : usersToRender.map(user => (
-                <Link key={user.id} href={`/users/${user.id}?${encodeURIComponent(user.name.firstname + " " + user.name.lastname)}`}>
+                <Link key={user.id} href={"/users/" + user.id}>
                     <li>{user.name.firstname} {user.name.lastname}</li>
                 </Link>))
     ), [usersToRender, isFetching]);
 
     return (
+    <>
+        <Breadcrumb 
+            items={UsersBreadcrumb}
+        />
         <ul>
             {UsersToRender}
             <Pagination 
                 total={users.length}
             />
         </ul>
+    </>
     )
 }
 

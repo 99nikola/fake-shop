@@ -2,6 +2,8 @@ import { NextPage } from "next"
 import Link from "next/link";
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
+import { ProductsBreadcrumb } from "../../breadcrumb";
+import Breadcrumb from "../../components/molecules/Breadcrumb";
 import Pagination from "../../components/organisms/Pagination";
 import usePagination from "../../hooks/usePagination";
 import { wrapper } from "../../store";
@@ -19,18 +21,23 @@ const Products: NextPage = () => {
         isFetching
             ? "Loading"
             : productsToRender.map((product: IProduct) => (
-                <Link key={product.id} href={`/categories/${encodeURIComponent(product.category)}/${product.id}?${encodeURIComponent(product.title)}`}>
+                <Link key={product.id} href={"/categories/" + encodeURIComponent(product.category) + "/" + product.id}>
                     <li>{product.title}</li>    
                 </Link>))
     ), [productsToRender, isFetching]);
 
     return (
+    <>
+        <Breadcrumb 
+            items={ProductsBreadcrumb}
+        />
         <ul>
             {ProductsToRender}
             <Pagination 
                 total={products.length}
             />
         </ul>
+    </>
     )
 }
 

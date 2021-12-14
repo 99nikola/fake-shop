@@ -1,20 +1,28 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from "next"
 import Link from "next/link";
+import { CategoryBreadcrumb } from "../../../breadcrumb";
+import Breadcrumb from "../../../components/molecules/Breadcrumb";
 import { IProduct } from "../../../typescript/interfaces/Products";
 
 interface CategoryProps {
-    products: IProduct[]
+    products: IProduct[],
+    categoryName: string
 }
 
 const Category: NextPage<CategoryProps> = (props) => {
     return (
+    <>
+        <Breadcrumb 
+            items={CategoryBreadcrumb(props.categoryName)}
+        />
         <ul>
             {props.products.map((product) => (
-                <Link key={product.id} href={`/categories/${product.category}/${product.id}?${encodeURIComponent(product.title)}`}>
+                <Link key={product.id} href={"/categories/" + encodeURIComponent(product.category) + "/" + product.id}>
                     <li>{product.title}</li>
                 </Link>    
             ))}
         </ul>
+    </>
     );
 }
 
@@ -42,7 +50,8 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
     return ({
         props: {
-            products
+            products,
+            categoryName
         }
     });
 }

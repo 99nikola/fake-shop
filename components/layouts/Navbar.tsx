@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Flex from "../atoms/Flex.styled";
 import HeaderLink from "../atoms/HeaderLink";
-import Breadcrumb from "./Breadcrumb";
 
 const Navbar: React.FC = (props) => {
     return (
@@ -32,8 +31,6 @@ const Navbar: React.FC = (props) => {
                     <HeaderLink>Login</HeaderLink>
                 </Link>
             </Flex>
-
-            <Breadcrumb />
             
             <main>
                 {props.children}

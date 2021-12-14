@@ -1,4 +1,6 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from "next"
+import { ProductBreadcrumb } from "../../../../breadcrumb";
+import Breadcrumb from "../../../../components/molecules/Breadcrumb";
 import { IProduct } from "../../../../typescript/interfaces/Products";
 
 interface ProductProps {
@@ -8,6 +10,9 @@ interface ProductProps {
 const Product: NextPage<ProductProps> = (props) => {
     return (
         <div>
+            <Breadcrumb 
+                items={ProductBreadcrumb(props.product.id, props.product.category, props.product.title)}
+            />
             {props.product.title}
         </div>
     )

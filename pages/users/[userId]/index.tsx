@@ -1,4 +1,6 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import { UserBreadcrumb } from "../../../breadcrumb";
+import Breadcrumb from "../../../components/molecules/Breadcrumb";
 import { IUser } from "../../../typescript/interfaces/Users";
 
 interface UserProps {
@@ -8,6 +10,9 @@ interface UserProps {
 const User: NextPage<UserProps> = (props) => {
     return (
         <div>
+            <Breadcrumb 
+                items={UserBreadcrumb(props.user.name.firstname + " " + props.user.name.lastname, props.user.id)}
+            />
             {props.user.username}
         </div>
     )

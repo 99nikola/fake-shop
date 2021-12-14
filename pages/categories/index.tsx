@@ -2,6 +2,8 @@ import { NextPage } from "next"
 import Link from "next/link";
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
+import { CategoriesBreadcrumb } from "../../breadcrumb";
+import Breadcrumb from "../../components/molecules/Breadcrumb";
 import Pagination from "../../components/organisms/Pagination";
 import usePagination from "../../hooks/usePagination";
 import { wrapper } from "../../store";
@@ -19,18 +21,23 @@ const Categories: NextPage = () => {
         isFetching
             ? "Loading"
             : categoriesToRender.map((category: string) => (
-                <Link href={`/categories/${category}`} key={category}>
+                <Link href={"/categories/" + category} key={category}>
                     <li>{category}</li>
                 </Link>))
     ), [categoriesToRender, isFetching]);
 
     return (
+    <>
+        <Breadcrumb
+            items={CategoriesBreadcrumb}
+        />
         <ul>
             {CategoriesToRender} 
             <Pagination 
                 total={categories.length}
             />
         </ul>
+    </>
     );
 }
 
