@@ -7,7 +7,8 @@
     "start": "next start",
     "lint": "next lint",
     "postinstall": "husky install",
-    "test": "jest"
+    "test": "jest",
+    "export": "next export"
   },
   "dependencies": {
     "next": "12.0.7",
