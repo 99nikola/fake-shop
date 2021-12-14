@@ -8,11 +8,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      NEXT_PUBLIC_BASE_PATH: /fake-shop
 
     strategy:
       matrix:
         node-version: [14.x]
-
 
     steps:
       - name: Get files
