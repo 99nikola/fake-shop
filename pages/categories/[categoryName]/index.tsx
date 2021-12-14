@@ -45,7 +45,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async (context) => {
 
     const categoryName = context.params?.categoryName;
-    console.log(categoryName);
     const res = await fetch(`https://fakestoreapi.com/products/category/${categoryName}`);
     const products = await res.json();
 
