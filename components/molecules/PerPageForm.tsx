@@ -6,7 +6,6 @@ import { setPerPage } from "../../utils/routerQuery";
 import Input from "../atoms/Input.styled";
 
 interface PerPageFormProps {
-    setCustomValue: React.Dispatch<React.SetStateAction<number>>,
     setCustomInput: React.Dispatch<React.SetStateAction<boolean>>
 }
 const PerPageForm: React.FC<PerPageFormProps> = (props) => {
@@ -15,9 +14,7 @@ const PerPageForm: React.FC<PerPageFormProps> = (props) => {
     const router = useRouter();
 
     const onValid = useCallback((data: any) => {
-        const value = Number.parseInt(data.perPage);
         setPerPage(router, data.perPage);
-        props.setCustomValue(value);
         props.setCustomInput(false);
     }, [router]);
 
