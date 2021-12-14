@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import Pagination from "../../components/organisms/Pagination";
 import usePagination from "../../hooks/usePagination";
 import { wrapper } from "../../store";
-import { fetchUsers, setUsers } from "../../store/users/UsersActions";
+import { fetchUsers } from "../../store/users/UsersActions";
 
 const Users: NextPage = () => {
 

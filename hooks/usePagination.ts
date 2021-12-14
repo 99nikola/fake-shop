@@ -22,7 +22,7 @@ const usePagination = (props: PaginateProps) => {
         for (let i=(page-1) * perPage; i<cap; i++) 
             itemsToRender.push(props.items[i]);
         return itemsToRender; 
-    }, [page, props, props.items]);
+    }, [page, perPage, props.items]);
 
     return ItemsToRender;
 }
