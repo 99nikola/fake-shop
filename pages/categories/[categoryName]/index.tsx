@@ -1,4 +1,4 @@
-import { GetServerSideProps, GetStaticProps, NextPage } from "next"
+import { GetStaticPaths, GetStaticProps, NextPage } from "next"
 import Link from "next/link";
 import { IProduct } from "../../../typescript/interfaces/Products";
 
@@ -18,7 +18,23 @@ const Category: NextPage<CategoryProps> = (props) => {
     );
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getStaticPaths: GetStaticPaths = async () => {
+    const res = await fetch("https://fakestoreapi.com/products/categories");
+    const categories: string[] = await res.json();
+
+    const paths = categories.map(category => ({
+        params: {
+            categoryName: category,
+        }
+    }));
+
+    return ({
+       paths: paths,
+       fallback: false
+    });
+}
+
+export const getStaticProps: GetStaticProps = async (context) => {
 
     const categoryName = context.params?.categoryName;
     const res = await fetch(`https://fakestoreapi.com/products/category/${categoryName}`);
