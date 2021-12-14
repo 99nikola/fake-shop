@@ -1,1 +1,0 @@
-self.__SSG_MANIFEST=new Set(["\u002Fcategories\u002F[categoryName]","\u002Fcategories\u002F[categoryName]\u002F[productId]","\u002Fusers\u002F[userId]"]);self.__SSG_MANIFEST_CB&&self.__SSG_MANIFEST_CB()
