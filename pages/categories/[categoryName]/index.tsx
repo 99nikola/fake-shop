@@ -32,7 +32,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
     const paths = categories.map(category => ({
         params: {
-            categoryName: encodeURIComponent(category),
+            categoryName: category,
         }
     }));
 
