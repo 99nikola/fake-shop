@@ -8,8 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "postinstall": "husky install",
-    "test": "jest",
-    "deploy": "gh-pages -d out"
+    "test": "jest"
   },
   "dependencies": {
     "next": "12.0.7",
