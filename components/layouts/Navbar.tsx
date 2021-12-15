@@ -2,9 +2,13 @@ import Link from "next/link";
 import Flex from "../atoms/Flex.styled";
 import HeaderLink from "../atoms/HeaderLink";
 
-const Navbar: React.FC = (props) => {
+interface NavbarProps {
+    id?: string | number
+}
+
+const Navbar: React.FC<NavbarProps> = (props) => {
     return (
-        <nav>
+        <div data-testid={props.id}>
             <Flex border="1px solid lightgray"
                 width="60%"
                 height="50px"
@@ -35,7 +39,7 @@ const Navbar: React.FC = (props) => {
             <main>
                 {props.children}
             </main>
-        </nav>
+        </div>
     )
 }
 
