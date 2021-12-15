@@ -20,8 +20,8 @@ const Users: NextPage = () => {
         isFetching
             ? "Loading"
             : usersToRender.map(user => (
-                <Link key={user.id} href={"/users/" + user.id}>
-                    <li>{user.name.firstname} {user.name.lastname}</li>
+                <Link passHref={true} key={user.id} href={"/users/" + user.id}>
+                    <a><li>{user.name.firstname} {user.name.lastname}</li></a>
                 </Link>))
     ), [usersToRender, isFetching]);
 

@@ -1,9 +1,8 @@
-import Link from "next/link";
+import Link from "../atoms/Link";
 import { useMemo } from "react";
 import { BreadcrumbItem } from "../../typescript/interfaces/Breadcrumb";
 import Flex from "../atoms/Flex.styled";
-import StyledLink from "../atoms/StyledLink.styled";
-
+import { useCallback } from "react";
 
 interface BreadcrumbProps {
     items: BreadcrumbItem[]   
@@ -11,10 +10,16 @@ interface BreadcrumbProps {
 
 const Breadcrumb: React.FC<BreadcrumbProps> = (props) => {
 
-    const BreadcrumbLinks = useMemo(() => (
+    const backgroundColor = useCallback((i: number) => (
+        i === (props.items.length-1)
+            ? "lightgray"
+            : "whitesmoke"
+    ), [props.items]);
+
+    const BreadcrumbLinks = useMemo(() => ( 
         props.items.map((item, i) => (
-            <Link key={item.breadcrumb} href={item.href}>
-                <StyledLink last={i === (props.items.length-1)}>{item.breadcrumb}</StyledLink>
+            <Link key={item.breadcrumb} href={item.href} backgroundColor={backgroundColor(i)}>
+                {item.breadcrumb}
             </Link>
         ))
     ), [props.items]);

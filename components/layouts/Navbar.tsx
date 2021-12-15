@@ -1,6 +1,5 @@
-import Link from "next/link";
+import Link from "../atoms/Link";
 import Flex from "../atoms/Flex.styled";
-import HeaderLink from "../atoms/HeaderLink";
 
 interface NavbarProps {
     id?: string | number
@@ -16,23 +15,23 @@ const Navbar: React.FC<NavbarProps> = (props) => {
                 justifyContent="space-evenly"
                 alignItems="center"
             >   
-                <Link  href="/">
-                    <HeaderLink>Home</HeaderLink>
+                <Link href="/" color="white">
+                    Home
                 </Link>
-                <Link  href="/users">
-                    <HeaderLink>Users</HeaderLink>
+                <Link href="/users" color="white">
+                    Users
                 </Link>
-                <Link  href="/products">
-                    <HeaderLink>Products</HeaderLink>
+                <Link href="/products" color="white">
+                    Products
                 </Link>
-                <Link  href="/categories">
-                    <HeaderLink>Categories</HeaderLink>
+                <Link href="/categories" color="white">
+                    Categories
                 </Link>
-                <Link  href="/carts">
-                    <HeaderLink>Carts</HeaderLink>
+                <Link href="/carts" color="white">
+                    Carts
                 </Link>
-                <Link  href="/login">
-                    <HeaderLink>Login</HeaderLink>
+                <Link href="/login" color="white">
+                    Login
                 </Link>
             </Flex>
             

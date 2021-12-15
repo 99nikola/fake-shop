@@ -21,8 +21,8 @@ const Products: NextPage = () => {
         isFetching
             ? "Loading"
             : productsToRender.map((product: IProduct) => (
-                <Link key={product.id} href={"/categories/" + encodeURIComponent(product.category) + "/" + product.id}>
-                    <li>{product.title}</li>    
+                <Link passHref={true} key={product.id} href={"/categories/" + encodeURIComponent(product.category) + "/" + product.id}>
+                    <a><li>{product.title}</li></a>
                 </Link>))
     ), [productsToRender, isFetching]);
 
