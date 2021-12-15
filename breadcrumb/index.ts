@@ -29,7 +29,7 @@ export const ProductsBreadcrumb: BreadcrumbItem[] = [
 ];
 
 export const CategoriesBreadcrumb: BreadcrumbItem[] = [
-    ...HomeBreadcrumb,
+    ...ProductsBreadcrumb,
     {
         breadcrumb: "Categories",
         href: "/categories"
@@ -51,3 +51,12 @@ export const ProductBreadcrumb = (productId: number, categoryName: string, produ
         href: "/categories/" + encodeURIComponent(categoryName) + "/" + productId
     }
 ]);
+
+
+export const CartsBreadcrumb: BreadcrumbItem[] = [
+    ...HomeBreadcrumb,
+    {
+        breadcrumb: "Carts",
+        href: "/carts"
+    }
+]

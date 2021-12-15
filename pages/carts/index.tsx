@@ -1,6 +1,8 @@
 import { NextPage } from "next";
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
+import { CartsBreadcrumb } from "../../breadcrumb";
+import Breadcrumb from "../../components/molecules/Breadcrumb";
 import Pagination from "../../components/organisms/Pagination";
 import usePagination from "../../hooks/usePagination";
 import { wrapper } from "../../store";
@@ -25,12 +27,17 @@ const Carts: NextPage = () => {
     ), [cartsToRender, isFetching]);
 
     return (
+    <>
+        <Breadcrumb 
+            items={CartsBreadcrumb}
+        />
         <ul>
             {CartsToRender}
             <Pagination 
                 total={carts.length}
             />
         </ul>
+    </>
     );
 }
 

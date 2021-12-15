@@ -1,5 +1,6 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from "next"
 import Link from "next/link";
+import { useMemo } from "react";
 import { CategoryBreadcrumb } from "../../../breadcrumb";
 import Breadcrumb from "../../../components/molecules/Breadcrumb";
 import { IProduct } from "../../../typescript/interfaces/Products";
@@ -10,10 +11,15 @@ interface CategoryProps {
 }
 
 const Category: NextPage<CategoryProps> = (props) => {
+
+    const CategoryBreadcrumbMemo = useMemo(() => 
+        CategoryBreadcrumb(props.categoryName), 
+        [props.categoryName]);
+
     return (
     <>
         <Breadcrumb 
-            items={CategoryBreadcrumb(props.categoryName)}
+            items={CategoryBreadcrumbMemo}
         />
         <ul>
             {props.products.map((product) => (
