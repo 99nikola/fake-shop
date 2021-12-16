@@ -16,22 +16,22 @@ const Navbar: React.FC<NavbarProps> = (props) => {
                 justifyContent="space-evenly"
                 alignItems="center"
             >   
-                <Link  href="/">
+                <Link href="/" passHref={true}>
                     <HeaderLink>Home</HeaderLink>
                 </Link>
-                <Link  href="/users">
+                <Link href="/users" passHref={true}>
                     <HeaderLink>Users</HeaderLink>
                 </Link>
-                <Link  href="/products">
+                <Link href="/products" passHref={true}>
                     <HeaderLink>Products</HeaderLink>
                 </Link>
-                <Link  href="/categories">
+                <Link href="/categories" passHref={true}>
                     <HeaderLink>Categories</HeaderLink>
                 </Link>
-                <Link  href="/carts">
+                <Link  href="/carts" passHref={true}>
                     <HeaderLink>Carts</HeaderLink>
                 </Link>
-                <Link  href="/login">
+                <Link href="/login" passHref={true}>
                     <HeaderLink>Login</HeaderLink>
                 </Link>
             </Flex>

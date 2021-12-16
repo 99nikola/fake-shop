@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const HeaderLink = styled.div`
+const HeaderLink = styled.a`
     border: 1px solid gray;
     padding 5px 10px;
     border-radius: 6px;

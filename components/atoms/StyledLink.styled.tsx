@@ -4,7 +4,7 @@ interface StyledLinkProps {
     last?: boolean
 }
 
-const StyledLink = styled.div<StyledLinkProps>`
+const StyledLink = styled.a<StyledLinkProps>`
     margin: 0 10px;
     padding: 5px 10px;
     border: 1px solid gray;

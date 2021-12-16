@@ -13,7 +13,7 @@ const Breadcrumb: React.FC<BreadcrumbProps> = (props) => {
 
     const BreadcrumbLinks = useMemo(() => (
         props.items.map((item, i) => (
-            <Link key={item.breadcrumb} href={item.href}>
+            <Link key={item.breadcrumb} href={item.href} passHref={true}>
                 <StyledLink last={i === (props.items.length-1)}>{item.breadcrumb}</StyledLink>
             </Link>
         ))
