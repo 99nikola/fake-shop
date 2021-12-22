@@ -32,7 +32,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
     const paths = users.map(user => ({
         params: {
             userId: user.id.toString()
-        }
+        },
+        locale: "srpski"
     }));
 
     return ({
