@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useMemo } from "react";
+import { memo, useMemo } from "react";
 import { BreadcrumbItem } from "../../typescript/interfaces/Breadcrumb";
 import Flex from "../atoms/Flex.styled";
 import StyledLink from "../atoms/StyledLink.styled";
@@ -29,4 +29,4 @@ const Breadcrumb: React.FC<BreadcrumbProps> = (props) => {
     );
 }
 
-export default Breadcrumb;
+export default memo(Breadcrumb);
