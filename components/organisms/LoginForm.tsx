@@ -17,7 +17,6 @@ const LoginForm: React.FC = () => {
     });
 
     const onSubmit: SubmitHandler<ILoginForm> = async (credentials) => {
-        console.log(credentials);
         
         fetch("https://fakestoreapi.com/auth/login", {
             method: "POST",
