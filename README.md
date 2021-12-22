@@ -26,10 +26,13 @@ Simple links to other pages
 
 ## Usage
 ```jsx
-    <Navbar>
-        <Breadcrumb />
-        ...
-    </Navbar>
+return (
+	....
+	<Breadcrumb
+		items={breadcrumbArray} />
+	...
+);
+
 ```
 
 
