@@ -5,6 +5,8 @@ import { wrapper } from "../store";
 import { useEffect } from "react";
 import * as ga from "react-ga";
 import { useRouter } from "next/router";
+ga.initialize(process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS as string);
+
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
 
