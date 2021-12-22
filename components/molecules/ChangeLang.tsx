@@ -13,7 +13,7 @@ const ChangeLang: React.FC<ChangeLangProps> = (props) => {
         router.replace({}, {}, {
             locale: props.locale
         });
-    }, [router.replace]);
+    }, [router.replace, props.locale]);
 
     return (
         <button onClick={handleLangChange}>
