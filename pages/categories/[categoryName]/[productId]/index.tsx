@@ -1,4 +1,6 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from "next"
+import Head from "next/head";
+import { useRouter } from "next/router";
 import { useMemo } from "react";
 import { ProductBreadcrumb } from "../../../../breadcrumb";
 import Breadcrumb from "../../../../components/molecules/Breadcrumb";
@@ -14,8 +16,23 @@ const Product: NextPage<ProductProps> = (props) => {
         ProductBreadcrumb(props.product.id, props.product.category, props.product.title), 
         [props.product.id, props.product.category, props.product.title]);
 
+    const router = useRouter();
+    console.log(router.pathname);
+
+    const url = useMemo(() => router.pathname, [router.pathname]);
+    const image = useMemo(() => props.product.image, [props.product.image]);
+
     return (
         <div>
+            <Head>
+                <title>{props.product.title}</title>
+                <meta name="description" content={props.product.description} />
+                
+                <meta property="og:title" content={props.product.title} />
+                <meta property="og:description" content={props.product.description} />
+                <meta property="og:url" content={url} />
+                <meta property="og:image" content={image} />
+            </Head>
             <Breadcrumb 
                 items={ProductBreadcrumbMemo}
             />
