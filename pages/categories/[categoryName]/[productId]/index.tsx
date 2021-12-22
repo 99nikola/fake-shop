@@ -17,7 +17,6 @@ const Product: NextPage<ProductProps> = (props) => {
         [props.product.id, props.product.category, props.product.title]);
 
     const router = useRouter();
-    console.log(router.pathname);
 
     const url = useMemo(() => router.pathname, [router.pathname]);
     const image = useMemo(() => props.product.image, [props.product.image]);
@@ -49,7 +48,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
         params: {
             productId: product.id.toString(),
             categoryName: product.category
-        }
+        },
+        locale: "srpski"
     }));
 
     return ({

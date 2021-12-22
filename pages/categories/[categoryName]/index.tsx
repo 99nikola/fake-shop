@@ -38,8 +38,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
     const paths = categories.map(category => ({
         params: {
-            categoryName: category,
-        }
+            categoryName: category
+        },
+        locale: "srpski"
     }));
 
     return ({
